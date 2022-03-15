@@ -16,20 +16,20 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public boolean grab(int userId, int roomId) {
 //        TblOrder order = mapper.selectByPrimaryKey(orderId);
-//        try {
-//            Thread.sleep(2000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//
-//        // TODO 处理会议室相关的业务逻辑
-//
-//        if (order.getOrderStatus().intValue() == 0) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // TODO 处理会议室相关的业务逻辑
+
+        if (true/*order.getOrderStatus().intValue() == 0*/) {
 //            order.setOrderStatus(1);
 //            mapper.updateByPrimaryKeySelective(order);
-//
+
             return true;
-//        }
-//        return false;
+        }
+        return false;
     }
 }

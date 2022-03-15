@@ -13,11 +13,11 @@ public class MeetingController {
 
     @Autowired
     // 无锁
-    @Qualifier("grabNoLockService")
+//    @Qualifier("grabNoLockService")
     // jvm锁
 //    @Qualifier("grabJvmLockService")
     // mysql锁
-//    @Qualifier("grabMysqlLockService")
+    @Qualifier("grabMysqlLockService")
     // 手写redis
 //    @Qualifier("grabRedisLockService")
     //单个redisson
