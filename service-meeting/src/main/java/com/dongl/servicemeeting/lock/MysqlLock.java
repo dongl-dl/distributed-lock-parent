@@ -1,6 +1,8 @@
 package com.dongl.servicemeeting.lock;
 
 
+import com.dongl.servicemeeting.domian.RoomInfoLock;
+import com.dongl.servicemeeting.mapper.RoomInfoLockMaaper;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +15,10 @@ import java.util.concurrent.locks.Lock;
 @Data
 public class MysqlLock implements Lock {
 
-//	@Autowired
-//	private TblOrderLockDao mapper;
+	@Autowired
+	private RoomInfoLockMaaper mapper;
 	
-//	private ThreadLocal<TblOrderLock> orderLockThreadLocal ;
+	private ThreadLocal<RoomInfoLock> roomLockThreadLocal ;
 
 	@Override
 	public void lock() {
@@ -41,9 +43,9 @@ public class MysqlLock implements Lock {
 	@Override
 	public boolean tryLock() {
 		try {
-//			TblOrderLock tblOrderLock = orderLockThreadLocal.get();
-//			mapper.insertSelective(tblOrderLock);
-//			System.out.println("加锁对象："+orderLockThreadLocal.get());
+			RoomInfoLock roomInfoLock = roomLockThreadLocal.get();
+			mapper.insertSelective(roomInfoLock);
+			System.out.println("加锁对象："+roomLockThreadLocal.get());
 			return true;
 		}catch (Exception e) {
 			return false;
@@ -54,9 +56,9 @@ public class MysqlLock implements Lock {
 	
 	@Override
 	public void unlock() {
-//		mapper.deleteByPrimaryKey(orderLockThreadLocal.get().getOrderId());
-//		System.out.println("解锁对象："+orderLockThreadLocal.get());
-//		orderLockThreadLocal.remove();
+		mapper.deleteByPrimaryKey(roomLockThreadLocal.get().getRoomId());
+		System.out.println("解锁对象："+roomLockThreadLocal.get());
+		roomLockThreadLocal.remove();
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.dongl.servicemeeting.service.impl;
 
 
+import com.dongl.servicemeeting.domian.RoomInfoLock;
 import com.dongl.servicemeeting.lock.MysqlLock;
 import com.dongl.servicemeeting.service.GrabService;
 import com.dongl.servicemeeting.service.RoomService;
@@ -17,17 +18,17 @@ public class GrabMysqlLockServiceImpl implements GrabService {
     @Autowired
     private RoomService roomService;
 
-//    ThreadLocal<TblOrderLock> orderLock = new ThreadLocal<>();
+    ThreadLocal<RoomInfoLock> roomLock = new ThreadLocal<>();
 
     @Override
     public String grabRoom(int userId, int roomId) {
         // 生成锁
-//        TblOrderLock ol = new TblOrderLock();
-//        ol.setOrderId(orderId);
-//        ol.setDriverId(driverId);
-//
-//        orderLock.set(ol);
-//        lock.setOrderLockThreadLocal(orderLock);
+        RoomInfoLock roomInfoLock = new RoomInfoLock();
+        roomInfoLock.setRoomId(roomId);
+        roomInfoLock.setUserId(userId);
+
+        roomLock.set(roomInfoLock);
+        lock.setRoomLockThreadLocal(roomLock);
 
         // 加锁
         lock.lock();

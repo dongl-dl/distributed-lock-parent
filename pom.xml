@@ -8,5 +8,10 @@
     <artifactId>distributed-lock-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <modules>
+        <module>eureka-server</module>
+        <module>api-user</module>
+        <module>service-meeting</module>
+    </modules>
 
 </project>

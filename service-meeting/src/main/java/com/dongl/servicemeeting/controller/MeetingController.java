@@ -17,7 +17,7 @@ public class MeetingController {
     // jvm锁
 //    @Qualifier("grabJvmLockService")
     // mysql锁
-    @Qualifier("grabMysqlLockService")
+//    @Qualifier("grabMysqlLockService")
     // 手写redis
 //    @Qualifier("grabRedisLockService")
     //单个redisson

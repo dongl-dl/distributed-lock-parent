@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dongl.servicemeeting.mapper.RoomInfoMapper">
+  <resultMap id="BaseResultMap" type="com.dongl.servicemeeting.domian.RoomInfo">
+    <id column="room_id" jdbcType="INTEGER" property="roomId" />
+    <result column="room_status" jdbcType="INTEGER" property="roomStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    room_id, room_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from room_info
+    where room_id = #{roomId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from room_info
+    where room_id = #{roomId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="room_id" keyProperty="roomId" parameterType="com.dongl.servicemeeting.domian.RoomInfo" useGeneratedKeys="true">
+    insert into room_info (room_status)
+    values (#{roomStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="room_id" keyProperty="roomId" parameterType="com.dongl.servicemeeting.domian.RoomInfo" useGeneratedKeys="true">
+    insert into room_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roomStatus != null">
+        room_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roomStatus != null">
+        #{roomStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dongl.servicemeeting.domian.RoomInfo">
+    update room_info
+    <set>
+      <if test="roomStatus != null">
+        room_status = #{roomStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where room_id = #{roomId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dongl.servicemeeting.domian.RoomInfo">
+    update room_info
+    set room_status = #{roomStatus,jdbcType=INTEGER}
+    where room_id = #{roomId,jdbcType=INTEGER}
+  </update>
+</mapper>
