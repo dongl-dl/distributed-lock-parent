@@ -7,6 +7,14 @@
     <groupId>com.dongl</groupId>
     <artifactId>distributed-lock-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <name>distributed-lock-parent</name>
+    <description>Demo project for distributed-lock-parent</description>
+
+
+    <properties>
+        <java.version>1.8</java.version>
+        <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
+    </properties>
 
     <modules>
         <module>eureka-server</module>
