@@ -36,5 +36,7 @@ public class RenewLockServiceImpl implements RenewGrabLockService {
             redisTemplate.expire(key,time,TimeUnit.SECONDS);
             renewLock(key,value,time);
         }
+
+        //死循环 + 判断
     }
 }

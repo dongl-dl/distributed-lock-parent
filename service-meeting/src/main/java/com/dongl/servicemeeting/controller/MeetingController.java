@@ -25,7 +25,7 @@ public class MeetingController {
     /**
      * 无锁
      */
-    @Qualifier("noLockService")
+//    @Qualifier("noLockService")
 
     /**
      * jvm锁
@@ -51,6 +51,11 @@ public class MeetingController {
      * 红锁
      */
 //    @Qualifier("redLockService")
+
+    /**
+     * RedisLockRegistry
+     */
+    @Qualifier("cloudLockService")
     private GrabService grabService;
 
     @GetMapping("/v1/lockRoom")
