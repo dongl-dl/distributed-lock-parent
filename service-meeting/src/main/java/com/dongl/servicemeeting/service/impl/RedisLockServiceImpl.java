@@ -2,6 +2,7 @@ package com.dongl.servicemeeting.service.impl;
 
 
 import com.dongl.servicemeeting.service.GrabService;
+import com.dongl.servicemeeting.service.RenewGrabLockService;
 import com.dongl.servicemeeting.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -9,14 +10,24 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 
-@Service("grabRedisLockService")
-public class GrabRedisLockServiceImpl implements GrabService {
+/**
+ * @author dongliang7
+ * @projectName distributed-lock-parent
+ * @ClassName RedisLockServiceImpl.java
+ * @description: redis锁业务层
+ * @createTime 2022年03月20日 22:46:00
+ */
+@Service("redisLockService")
+public class RedisLockServiceImpl implements GrabService {
 
 	@Autowired
 	StringRedisTemplate stringRedisTemplate;
 
 	@Autowired
 	private RoomService roomService;
+
+	@Autowired
+	private RenewGrabLockService renewLockService;
 	
     @Override
     public String grabRoom(int userId , int roomId){
@@ -47,10 +58,19 @@ public class GrabRedisLockServiceImpl implements GrabService {
     	 */
     	boolean lockStatus = stringRedisTemplate.opsForValue().setIfAbsent(lock.intern(), userId+"", 30L, TimeUnit.SECONDS);
     	// 开个子线程，原来时间N，每个n/3，去续上n
+//		new Thread(() ->{
+//			renewLockService.renewLock(lock.intern(), userId+"", 30);
+//		}).start();
     	
     	if(!lockStatus) {
     		return null;
     	}
+
+//		try {
+//			TimeUnit.SECONDS.sleep(60);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
     	
     	try {
 			System.out.println("用户:" + userId + " 执行抢占会议室逻辑");

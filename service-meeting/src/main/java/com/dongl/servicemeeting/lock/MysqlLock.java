@@ -11,6 +11,14 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
+/**
+ * @author dongliang7
+ * @projectName distributed-lock-parent
+ * @ClassName MysqlLock.java
+ * @description: Mysql锁实现层
+ * @createTime 2022年03月19日 22:54:00
+ */
+
 @Service
 @Data
 public class MysqlLock implements Lock {

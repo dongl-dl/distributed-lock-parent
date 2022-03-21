@@ -1,5 +1,12 @@
 package com.dongl.servicemeeting.service.impl;
 
+/**
+ * @author dongliang7
+ * @projectName distributed-lock-parent
+ * @ClassName ddd.java
+ * @description: TODO
+ * @createTime 2022年03月21日 18:46:00
+ */
 import com.dongl.servicemeeting.constant.RedisKeyConstant;
 import com.dongl.servicemeeting.service.GrabService;
 import com.dongl.servicemeeting.service.RoomService;
@@ -12,19 +19,25 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author dongliang7
+ * @projectName distributed-lock-parent
+ * @ClassName RedLockServiceImpl.java
+ * @description: 红锁业务层
+ * @createTime 2022年03月20日 23:34:00
+ */
+@Service("redLockService")
+public class RedLockServiceImpl implements GrabService {
 
-@Service("grabRedisRedissonRedLockLockService")
-public class GrabRedisRedissonRedLockLockServiceImpl implements GrabService {
-
     @Autowired
-    @Qualifier("redissonRed1")
-    private RedissonClient redissonRed1;
+//    @Qualifier("redissonRed1")
+    private RedissonClient red1;
     @Autowired
-    @Qualifier("redissonRed2")
-    private RedissonClient redissonRed2;
+//    @Qualifier("redissonRed2")
+    private RedissonClient red2;
     @Autowired
-    @Qualifier("redissonRed3")
-    private RedissonClient redissonRed3;
+//    @Qualifier("redissonRed3")
+    private RedissonClient red3;
 
     @Autowired
     private RoomService roomService;
@@ -33,30 +46,24 @@ public class GrabRedisRedissonRedLockLockServiceImpl implements GrabService {
     public String grabRoom(int userId, int roomId) {
         //生成key
         String lockKey = (RedisKeyConstant.GRAB_LOCK_ROOM_KEY_PRE + roomId).intern();
-        //redisson锁 哨兵
-//        RLock rLock = redisson.getLock(lockKey);
-//        rLock.lock();
-
-        //redisson锁 单节点
-//        RLock rLock = redissonRed1.getLock(lockKey);
 
         //红锁 redis son
-        RLock rLock1 = redissonRed1.getLock(lockKey);
-        RLock rLock2 = redissonRed2.getLock(lockKey);
-        RLock rLock3 = redissonRed3.getLock(lockKey);
+        RLock rLock1 = red1.getLock(lockKey);
+        RLock rLock2 = red2.getLock(lockKey);
+        RLock rLock3 = red3.getLock(lockKey);
         RedissonRedLock rLock = new RedissonRedLock(rLock1,rLock2,rLock3);
 
 
 
         try {
             rLock.lock();
-            try {
-                TimeUnit.MINUTES.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+
+//            try {
+//                TimeUnit.SECONDS.sleep(60);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
             // 此代码默认 设置key 超时时间30秒，过10秒，再延时
-            System.out.println("用户:" + userId + " 执行抢占会议室逻辑");
 
             boolean b = roomService.grab(userId, roomId);
             if (b) {

@@ -8,8 +8,15 @@ import com.dongl.servicemeeting.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("grabMysqlLockService")
-public class GrabMysqlLockServiceImpl implements GrabService {
+/**
+ * @author dongliang7
+ * @projectName distributed-lock-parent
+ * @ClassName MysqlLockServiceImpl.java
+ * @description: mysql锁业务层
+ * @createTime 2022年03月21日 22:25:00
+ */
+@Service("mysqlLockService")
+public class MysqlLockServiceImpl implements GrabService {
 
     @Autowired
     private MysqlLock lock;
@@ -35,7 +42,6 @@ public class GrabMysqlLockServiceImpl implements GrabService {
 
         // 执行业务
         try {
-            System.out.println("用户:" + userId + " 执行抢占会议室逻辑");
 
             boolean b = roomService.grab(userId, roomId);
             if (b) {

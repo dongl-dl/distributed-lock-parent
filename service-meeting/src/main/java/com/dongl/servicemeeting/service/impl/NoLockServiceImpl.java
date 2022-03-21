@@ -5,8 +5,15 @@ import com.dongl.servicemeeting.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("grabNoLockService")
-public class GrabNoLockServiceImpl implements GrabService {
+/**
+ * @author dongliang7
+ * @projectName distributed-lock-parent
+ * @ClassName NoLockServiceImpl.java
+ * @description: 无锁业务层
+ * @createTime 2022年03月20日 22:15:00
+ */
+@Service("noLockService")
+public class NoLockServiceImpl implements GrabService {
     @Autowired
     private RoomService roomService;
 

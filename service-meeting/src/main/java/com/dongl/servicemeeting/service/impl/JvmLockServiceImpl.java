@@ -5,8 +5,16 @@ import com.dongl.servicemeeting.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("grabJvmLockService")
-public class GrabJvmLockServiceImpl implements GrabService {
+/**
+ * @author dongliang7
+ * @projectName distributed-lock-parent
+ * @ClassName JvmLockServiceImpl.java
+ * @description: jvm锁
+ * @createTime 2022年03月20日 22:12:00
+ */
+
+@Service("jvmLockService")
+public class JvmLockServiceImpl implements GrabService {
 
 	@Autowired
 	private RoomService roomService;

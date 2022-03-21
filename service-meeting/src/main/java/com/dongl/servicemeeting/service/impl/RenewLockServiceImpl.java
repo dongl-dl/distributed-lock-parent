@@ -9,10 +9,14 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author yueyi2019
+ * @author dongliang7
+ * @projectName distributed-lock-parent
+ * @ClassName RenewLockServiceImpl.java
+ * @description: 手写redis锁续期
+ * @createTime 2022年03月21日 23:34:00
  */
 @Service
-public class RenewGrabLockServiceImpl implements RenewGrabLockService {
+public class RenewLockServiceImpl implements RenewGrabLockService {
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
@@ -21,7 +25,8 @@ public class RenewGrabLockServiceImpl implements RenewGrabLockService {
     @Async
     public void renewLock(String key, String value, int time) {
         String v = redisTemplate.opsForValue().get(key);
-        if (v.equals(value)){
+        //判断是自己加的锁
+        if (null != v && v.equals(value)){
             int sleepTime = time / 3;
             try {
                 Thread.sleep(sleepTime * 1000);

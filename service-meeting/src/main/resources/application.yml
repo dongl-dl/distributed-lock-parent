@@ -23,11 +23,11 @@ spring:
       test-on-return: false
 
   redis:
-    database: 0
+    database: 1
     host: 127.0.0.1
     port: 6379
     timeout: 2000
-    password: RootCC123@
+    password: CcRe123456@
 
 
 #自定义哨兵

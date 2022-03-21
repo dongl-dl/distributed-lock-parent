@@ -5,16 +5,24 @@ import com.dongl.servicemeeting.service.RoomService;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author dongliang7
+ * @projectName distributed-lock-parent
+ * @ClassName RedissonLockServiceImpl.java
+ * @description: redisson锁业务层
+ * @createTime 2022年03月20日 22:23:00
+ */
+@Service("redisSonLockService")
+public class RedissonLockServiceImpl implements GrabService {
 
-@Service("grabRedisRedissonService")
-public class GrabRedisRedissonServiceImpl implements GrabService {
-
-	@Autowired
-    RedissonClient redissonClient;
+    @Autowired
+    @Qualifier("redissonClient")
+    private RedissonClient redissonClient;
 
     @Autowired
     private RoomService roomService;
