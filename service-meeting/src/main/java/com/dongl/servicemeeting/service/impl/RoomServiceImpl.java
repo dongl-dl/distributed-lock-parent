@@ -35,7 +35,7 @@ public class RoomServiceImpl implements RoomService {
         // TODO 处理会议室相关的业务逻辑
         //模拟业务 睡 200ms
         try {
-            Thread.sleep(200);
+            Thread.sleep(10);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -41,25 +41,25 @@ public class RedisConfig {
 
 
     /**------------------------------ 红锁 ----------------------------------*/
-//    @Bean(name = "redissonRed1")
-//    @Primary
-//    public RedissonClient redissonRed1(){
-//        Config config = new Config();
-//        config.useSingleServer().setAddress("redis://127.0.0.1:6380").setDatabase(0).setPassword("CcRe123456@");
-//        return Redisson.create(config);
-//    }
-//    @Bean(name = "redissonRed2")
-//    public RedissonClient redissonRed2(){
-//        Config config = new Config();
-//        config.useSingleServer().setAddress("redis://127.0.0.1:6381").setDatabase(0).setPassword("CcRe123456@");
-//        return Redisson.create(config);
-//    }
-//    @Bean(name = "redissonRed3")
-//    public RedissonClient redissonRed3(){
-//        Config config = new Config();
-//        config.useSingleServer().setAddress("redis://127.0.0.1:6382").setDatabase(0).setPassword("CcRe123456@");
-//        return Redisson.create(config);
-//    }
+    @Bean(name = "redissonRed1")
+    @Primary
+    public RedissonClient redissonRed1(){
+        Config config = new Config();
+        config.useSingleServer().setAddress("redis://127.0.0.1:6380").setDatabase(0).setPassword("CcRe123456@");
+        return Redisson.create(config);
+    }
+    @Bean(name = "redissonRed2")
+    public RedissonClient redissonRed2(){
+        Config config = new Config();
+        config.useSingleServer().setAddress("redis://127.0.0.1:6381").setDatabase(0).setPassword("CcRe123456@");
+        return Redisson.create(config);
+    }
+    @Bean(name = "redissonRed3")
+    public RedissonClient redissonRed3(){
+        Config config = new Config();
+        config.useSingleServer().setAddress("redis://127.0.0.1:6382").setDatabase(0).setPassword("CcRe123456@");
+        return Redisson.create(config);
+    }
 
 
 
@@ -76,10 +76,10 @@ public class RedisConfig {
     
 
     /**------------------------------ 单个redisson ----------------------------------*/
-    @Bean
-    public RedissonClient redissonClient() {
-    	Config config = new Config();
-    	config.useSingleServer().setAddress("redis://127.0.0.1:6383").setDatabase(1).setPassword("CcRe123456@");
-    	return Redisson.create(config);
-    }
+//    @Bean
+//    public RedissonClient redissonClient() {
+//    	Config config = new Config();
+//    	config.useSingleServer().setAddress("redis://127.0.0.1:6383").setDatabase(1).setPassword("CcRe123456@");
+//    	return Redisson.create(config);
+//    }
 }

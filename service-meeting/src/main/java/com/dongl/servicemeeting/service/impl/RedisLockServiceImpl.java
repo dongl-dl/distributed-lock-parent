@@ -58,19 +58,22 @@ public class RedisLockServiceImpl implements GrabService {
     	 */
     	boolean lockStatus = stringRedisTemplate.opsForValue().setIfAbsent(lock.intern(), userId+"", 30L, TimeUnit.SECONDS);
     	// 开个子线程，原来时间N，每个n/3，去续上n
-//		new Thread(() ->{
-//			renewLockService.renewLock(lock.intern(), userId+"", 30);
-//		}).start();
+		new Thread(() ->{
+			renewLockService.renewLock(lock.intern(), userId+"", 30);
+		}).start();
     	
     	if(!lockStatus) {
+			System.out.println("获取锁失败");
     		return null;
-    	}
+    	}else {
+			System.out.println("获取锁成功");
+		}
 
-//		try {
-//			TimeUnit.SECONDS.sleep(60);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			TimeUnit.SECONDS.sleep(60);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
     	
     	try {
 			System.out.println("用户:" + userId + " 执行抢占会议室逻辑");

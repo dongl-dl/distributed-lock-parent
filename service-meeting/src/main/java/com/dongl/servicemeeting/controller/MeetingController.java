@@ -41,7 +41,6 @@ public class MeetingController {
      * 手写redis
      */
 //    @Qualifier("redisLockService")
-
     /**
      * RedisSon
      */
@@ -50,12 +49,8 @@ public class MeetingController {
     /**
      * 红锁
      */
-//    @Qualifier("redLockService")
+    @Qualifier("redLockService")
 
-    /**
-     * RedisLockRegistry
-     */
-    @Qualifier("cloudLockService")
     private GrabService grabService;
 
     @GetMapping("/v1/lockRoom")

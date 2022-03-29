@@ -30,13 +30,13 @@ import java.util.concurrent.TimeUnit;
 public class RedLockServiceImpl implements GrabService {
 
     @Autowired
-//    @Qualifier("redissonRed1")
+    @Qualifier("redissonRed1")
     private RedissonClient red1;
     @Autowired
-//    @Qualifier("redissonRed2")
+    @Qualifier("redissonRed2")
     private RedissonClient red2;
     @Autowired
-//    @Qualifier("redissonRed3")
+    @Qualifier("redissonRed3")
     private RedissonClient red3;
 
     @Autowired
@@ -59,7 +59,7 @@ public class RedLockServiceImpl implements GrabService {
             rLock.lock();
 
 //            try {
-//                TimeUnit.SECONDS.sleep(60);
+//                TimeUnit.SECONDS.sleep(1000);
 //            } catch (InterruptedException e) {
 //                e.printStackTrace();
 //            }

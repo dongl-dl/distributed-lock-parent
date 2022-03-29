@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class RedissonLockServiceImpl implements GrabService {
 
     @Autowired
-    @Qualifier("redissonClient")
+//    @Qualifier("redissonClient")
     private RedissonClient redissonClient;
 
     @Autowired
